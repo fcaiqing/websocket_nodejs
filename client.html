@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User</title>
+	<meta charset="UTF-8">
+<style>
+body{
+padding:0px;
+margin:0px;
+}
+</style>
+<script type="text/javascript">
+	var ws=new WebSocket('ws://192.168.1.126:8000/');	//connect to websocket server.
+	ws.onopen=function(event){
+		console.log("connect successfully.");
+		document.getElementById("valueLabel").innerHTML="<br><font color='green'>connect to websocket server successfully----"+currentTime()+"</font>";
+	};
+	ws.onmessage=function(event){		//receive msg from server and hand.
+		document.getElementById("valueLabel").innerHTML+="<br>"+event.data;
+	};
+	ws.onclose=function(event){		//close event.
+		console.log("disconnect.");
+		console.log("readyState:"+ws.readyState);
+	};
+	function send_msg(){	//send to server.
+		var name=document.getElementById("usrName").value;
+		var words=document.getElementById("words").value;
+		ws.send(name+ " say:"+ words+ "----------------------"+ currentTime());
+		//console.log(name+ " say:"+ words+ "----------------------"+ currentTime());
+	};
+	function disconnect(){
+		document.getElementById("valueLabel").innerHTML+="<font color='red'>disconnect from server.</font>";
+	}
+	function currentTime(){		//get time.
+		return (new Date().toLocaleString());
+	}
+</script>
+</head>
+<body>
+<div id="position"> </div>
+<input type="button" value="Disconnect" onclick="disconnect();"/>
+Name:<input type="text" name="usrName" id="usrName">
+Words:<input type="text" name="words" id="words" maxlength="100"/>
+<input type="button" id="send" value="Send" onclick="send_msg();"/>
+<br>
+<div id="valueLabel"> </div>
+</body>
+</html>
