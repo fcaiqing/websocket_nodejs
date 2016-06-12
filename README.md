@@ -6,4 +6,4 @@
    - install node.js and npm
    - download node package nodejs-websocket, and install like this: npm install nodejs-websocket.You need specify the path of nodejs-websocket or place it on the repository of nodejs installation.
    - run your chat_server.js like: node chat_server.js.
-![image](/websocket_nodejs/blob/master/client.png)
+![image](https://github.com/fcaiqing/websocket_nodejs/blob/master/server.png)
